@@ -13,9 +13,9 @@ void getscreenanchor(int &y, int &x);
 void getscreensize(int &y, int &x);
 
 int gotoyx(int y, int x);
-void getcursor(int& y, int& x);
+void getcursor(int &y, int &x);
 
 void printc(char c);
-int printl(const char* fmt, ...);
+int printl(const char *fmt, ...);
 
 #endif

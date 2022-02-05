@@ -16,7 +16,7 @@ public:
 private:
 	void init_game();
 	void restart_game();
-	void next_point();
+	void generate_food();
 	void move_snake();
 	void print_snake();
 	void print_food();
@@ -24,9 +24,12 @@ private:
 private:
 	std::deque<CPoint> m_SnakeSegmets;
 	int m_Level;
+	int m_Direction;
+	bool m_ChangedDirection;
+
 	CPoint m_Food;
 
-	int m_Direcrion;
+	int m_Ticks;
 
 	bool m_Started;
 	bool m_Paused;

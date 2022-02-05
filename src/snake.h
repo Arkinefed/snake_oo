@@ -20,6 +20,8 @@ private:
 	void move_snake();
 	void print_snake();
 	void print_food();
+	void print_level();
+	void print_key_info();
 
 private:
 	std::deque<CPoint> m_SnakeSegmets;
@@ -35,6 +37,8 @@ private:
 	bool m_Paused;
 	bool m_Help;
 	bool m_Finished;
+
+	const char *m_GameName = "snake_oo";
 };
 
 #endif

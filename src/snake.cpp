@@ -2,6 +2,7 @@
 
 #include <cstdlib>
 #include <ctime>
+#include <cstring>
 
 #include <ncurses.h>
 
@@ -16,12 +17,11 @@ void CSnake::paint()
 {
 	CFramedWindow::paint();
 
+	mvprintw(geom.topleft.y, geom.topleft.x + geom.size.x - strlen(m_GameName) - 4, "+ %s ", m_GameName);
+
 	if (m_Started == false)
 	{
-		mvprintw(geom.topleft.y + 2, geom.topleft.x + 3, "h - help");
-		mvprintw(geom.topleft.y + 3, geom.topleft.x + 3, "p - pause");
-		mvprintw(geom.topleft.y + 4, geom.topleft.x + 3, "r - restart");
-		mvprintw(geom.topleft.y + 5, geom.topleft.x + 3, "w, a, s, d - move");
+		print_key_info();
 
 		mvprintw(geom.topleft.y + 8, geom.topleft.x + 3, "spacebar - start game");
 	}
@@ -29,16 +29,13 @@ void CSnake::paint()
 	{
 		if (m_Help == true)
 		{
-			mvprintw(geom.topleft.y, geom.topleft.x + 1, " LEVEL %d +", m_Level);
+			print_level();
 
-			mvprintw(geom.topleft.y + 2, geom.topleft.x + 3, "h - help");
-			mvprintw(geom.topleft.y + 3, geom.topleft.x + 3, "p - pause");
-			mvprintw(geom.topleft.y + 4, geom.topleft.x + 3, "r - restart");
-			mvprintw(geom.topleft.y + 5, geom.topleft.x + 3, "w, a, s, d - move");
+			print_key_info();
 		}
 		else if (m_Paused == true)
 		{
-			mvprintw(geom.topleft.y, geom.topleft.x + 1, " LEVEL %d +", m_Level);
+			print_level();
 
 			mvprintw(geom.topleft.y + geom.size.y / 2 - 1, geom.topleft.x + 3, "game paused");
 		}
@@ -51,7 +48,7 @@ void CSnake::paint()
 		}
 		else
 		{
-			mvprintw(geom.topleft.y, geom.topleft.x + 1, " LEVEL %d +", m_Level);
+			print_level();
 
 			print_snake();
 			print_food();
@@ -350,4 +347,17 @@ void CSnake::print_snake()
 void CSnake::print_food()
 {
 	mvprintw(geom.topleft.y + m_Food.y + 1, geom.topleft.x + m_Food.x + 1, "#");
+}
+
+void CSnake::print_level()
+{
+	mvprintw(geom.topleft.y, geom.topleft.x + 1, " LEVEL %d +", m_Level);
+}
+
+void CSnake::print_key_info()
+{
+	mvprintw(geom.topleft.y + 2, geom.topleft.x + 3, "h - help");
+	mvprintw(geom.topleft.y + 3, geom.topleft.x + 3, "p - pause");
+	mvprintw(geom.topleft.y + 4, geom.topleft.x + 3, "r - restart");
+	mvprintw(geom.topleft.y + 5, geom.topleft.x + 3, "w, a, s, d - move");
 }
